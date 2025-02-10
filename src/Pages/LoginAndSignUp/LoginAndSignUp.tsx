@@ -13,11 +13,11 @@ const LoginAndSignup:React.FC=()=>{
             
             <div className={`${styles.LoginandSignup}`}>
                 <div>
-                    <HeroImage />
+                    <HeroImage className={`${styles.heroImage}`} />
                 </div>
                 <div className={`${styles.interactive}`}>
                     <div>
-                        <p className={`${styles.welcomeMessage}`}>Welcome to EcoClean</p>
+                        <p style={{justifySelf:"center", fontFamily: "var(--poppins-regular)" }} >Welcome to <span style={{color:"var(--Secondary-green)"}} >EcoClean</span></p>
                         <Slider />
                     </div>
                     <Outlet />

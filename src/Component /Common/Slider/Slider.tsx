@@ -1,27 +1,32 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Button from "../Button/Button"
 import styles from "./Slider.module.css"
+import { useContext, useEffect } from "react";
+import { LoginPageContext } from "../../../Context/LoginContext";
 
 const Slider:React.FC=()=>{
-    let login_classname= "";
-    let register_classname= "";
+    const navigate = useNavigate();
+    const contextState= useContext(LoginPageContext);
+    
+    useEffect(() => {
+        if (contextState?.isLoginPage) {
+            navigate("/loginandsignup/login");
+        }
+    }, [contextState, navigate]);
 
-    const handleLogin=(e:React.MouseEvent<HTMLButtonElement>)=>{
-        login_classname= `${styles.active}`;
-        register_classname="";
+    const handleLogin = ()=>{
+        contextState===null ? null :contextState.setIsLoginPage(true);
+        navigate("/loginandsignup/login");
+
     }
-    const handleRegister=(e:React.MouseEvent<HTMLButtonElement>)=>{
-        register_classname= `${styles.active}`;
-        login_classname="";
+    const handleRegister = ()=>{
+        contextState===null ? null :contextState.setIsLoginPage(false);
+        navigate("/loginandsignup/register");
     }
     return(
         <div className={`${styles.slider}`}>
-            <Link to="/LoginAndSignup/Login">
-                <Button className={`${login_classname}`} onClick={handleLogin} label="Login" />
-            </Link>
-            <Link to="/LoginAndSignup/Register">
-                <Button className={`${register_classname}`} label="Register" onClick={handleRegister}/>
-            </Link>
+                <Button className={contextState===null ? "" :contextState.isLoginPage?styles.active:""} onClick={handleLogin} label="Login" />
+                <Button className={contextState===null ? "" :contextState.isLoginPage?"":styles.active} onClick={handleRegister} label="Register" />
         </div>
     )
 }

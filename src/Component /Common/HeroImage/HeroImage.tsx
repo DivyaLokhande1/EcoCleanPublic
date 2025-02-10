@@ -1,10 +1,13 @@
 import image from '../../../assets/images/Hero.png'
 import styles from "./HeroImage.module.css"
 
-const HeroImage:React.FC=()=>{
+type HeroImageTypy={
+    className?:string,
+}
+const HeroImage:React.FC<HeroImageTypy>=(className)=>{
     return(
         <div >
-            <img className={`${styles.heroImage}`} src={image} alt="Hero Image" />
+        <img className={className?`${className} ${styles.heroImage}`:`${styles.heroImage}`} src={image} alt="Hero Image" />
         </div>
     )
 }

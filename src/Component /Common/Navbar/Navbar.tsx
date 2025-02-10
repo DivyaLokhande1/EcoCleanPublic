@@ -1,17 +1,22 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Button from "../Button/Button";
 import styles from "./Navbar.module.css"
 import {  useNavigate } from "react-router-dom";
+import { LoginPageContext } from "../../../Context/LoginContext";
 
 const Navbar=() => {
   const [dummystate, setDummystate] = useState(true); //determines which navbar will be shown
 
+  const contextState= useContext(LoginPageContext);
   const navigate = useNavigate();
+  
   const handleOnClickLogin=()=>{
-    navigate("/LoginAndSignup/Login")
+    contextState===null ? null :contextState.setIsLoginPage(true);
+    navigate("/loginandsignup/login")
   }
   const handleOnClickSignUp=()=>{
-    navigate("/LoginAndSignup/Register")
+    contextState===null ? null :contextState.setIsLoginPage(false);
+    navigate("/loginandsignup/register")
   }
   return (
     <nav className={`${styles.navbar}`} >

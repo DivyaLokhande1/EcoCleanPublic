@@ -18,7 +18,7 @@ const TextInput:React.FC<TextInputType>=({
 })=>{
    return (
     <div >
-      <input className={`${className} ${styles.input}`} type={input_type} placeholder={placeholder} value={value} onChange={onChange} disabled={disabled}/>
+      <input className={className?`${styles.input} ${className}`:`${styles.input}`} type={input_type} placeholder={placeholder} value={value} onChange={onChange} disabled={disabled}/>
     </div>
    )
 }
